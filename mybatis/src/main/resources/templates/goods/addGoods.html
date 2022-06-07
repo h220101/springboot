@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+      
+   <!-- 사용자 정의 contents -->
+	<th:block layout:fragment="customContents">  
+		<table border="1">
+			<thead>
+				<tr>
+					<th>상품코드</th>
+					<th>상품이름</th>
+					<th>상품가격</th>
+					<th>상품등록날짜</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty(addGoods)}" th:each="l : ${addGoods}">	
+					<td th:text="${l.memberId}"></td>
+					<td th:text="${l.memberPw}"></td>
+					<td th:text="${l.memberName}"></td>
+					<td th:text="${l.memberLevel}"></td>
+					<td th:text="${l.memberEmail}"></td>
+					<td th:text="${l.memberAddr}"></td>
+					<td th:text="${l.memberRegDate}"></td>
+					<td>
+						<!-- /member/modifyMember?memberId=Id&memberPw=pw001 와 같다. 아래는 타임리프로 작성하는 방법 -->
+						<a th:href="@{/goods/addGoods(memberId=${l.memberId}, memberPw=${l.memberPw})}">수정</a>
+					</td>
+					<td>
+						<a th:href="@{/member/removeMember(memberId=${l.memberId})}">삭제</a>
+					</td>
+				</tr>
+				<tr th:unless="${not #lists.isEmpty(addGoods)}">	
+					<td colspan="9"> 조회된 내용이 없습니다. </td>
+				</tr>
+			</tbody>
+		</table>
+   </th:block>
+</html>

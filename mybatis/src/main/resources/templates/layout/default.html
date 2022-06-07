@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/head :: headFragment">
+</head>
+<body>
+	<div id="wrapper">
+		<div th:replace="fragments/header :: headerFragment"></div> <!-- 헤더 안 조각의 이름으로 교체한다. -->
+		<div th:replace="fragments/Leftmenu :: leftmenuFragment"></div> <!-- 레프트메뉴 안 조각의 이름으로 교체한다. -->		
+		<div id="rightcolumn" style="overflow-x:auto;">
+		
+			<!-- 사용자 정의 contents -->
+			<th:block layout:fragment="customContents">
+			</th:block>
+		</div>
+		<div th:replace="fragments/footer :: footerFragment"></div>
+	</div>
+</body>
+</html>

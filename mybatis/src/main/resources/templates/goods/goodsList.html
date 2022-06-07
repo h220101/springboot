@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}">
+      
+   <!-- 사용자 정의 contents -->
+	<th:block layout:fragment="customContents">  
+		<table border="1">
+			<thead>
+				<tr>
+					<th>상품코드</th>
+					<th>상품이름</th>
+					<th>상품가격</th>
+					<th>판매자아이디</th>
+					<th>상품등록날짜</th>
+					<th>수정</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${not #lists.isEmpty(goodsList)}" th:each="l : ${goodsList}">	
+					<td th:text="${l.goodsCode}"></td>
+					<td th:text="${l.goodsName}"></td>
+					<td th:text="${l.goodsPrice}"></td>
+					<td th:text="${l.goodsSellerId}"></td>
+					<td th:text="${l.goodsRegDate}"></td>
+					<td>
+						<!-- /member/modifyMember?memberId=Id&memberPw=pw001 와 같다. 아래는 타임리프로 작성하는 방법 -->
+						<a th:href="@{/goods/modifyGoods(goodsCode=${l.goodsCode})}">수정</a>
+					</td>
+					<td>
+						<a th:href="@{/member/removeGoods(goodsCode=${l.goodsCode})}">삭제</a>
+					</td>
+				</tr>
+				<tr th:unless="${not #lists.isEmpty(goodsList)}">	
+					<td colspan="9"> 조회된 내용이 없습니다. </td>
+				</tr>
+			</tbody>
+		</table>
+   </th:block>
+</html>
